@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class CharControler : MonoBehaviour {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform model;
@@ -21,22 +22,23 @@ public class CharControler : MonoBehaviour {
         input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
     }
 
-    private void Look()
-    {
+    private void Look() {
         if (input == Vector3.zero) return;
 
         Quaternion rot = Quaternion.LookRotation(input.ToIso(), Vector3.up);
         model.rotation = Quaternion.RotateTowards(model.rotation, rot, turnSpeed * Time.deltaTime);
     }
 
-private void Move()
-{
-    rb.MovePosition(transform.position + input.ToIso() * input.normalized.magnitude * speed * Time.deltaTime);
-}
+    private void Move() {
+        rb.MovePosition(transform.position + input.ToIso() * input.normalized.magnitude * speed * Time.deltaTime);
+    }
+
+    public Vector3 GetIsoInputDirection() {
+        return input.ToIso().normalized;
+    }
 }
 
-public static class Helpers 
-{
+public static class Helpers {
     private static Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
     public static Vector3 ToIso(this Vector3 input) => isoMatrix.MultiplyPoint3x4(input);
 }
