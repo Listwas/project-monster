@@ -133,5 +133,13 @@ public class PlayerController : MonoBehaviour {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position + transform.forward * midSlowAttackRange, midSlowAttackRange);
     }
+
+        void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("soldier"))
+            {
+                Debug.Log("Player collided with a soldier!");
+            }
+        }   
 }
 
