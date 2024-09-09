@@ -9,15 +9,21 @@ public class playerCombat : MonoBehaviour {
     public int fastAttackDamage = 5;
     public int midSlowAttackDamage = 10;
     public LayerMask enemyLayers;
-    public float evadeDistance = 2f; 
+    public float evadeDistance = 2f;
+    public float evadeDuration = 0.2f; 
+    public float evadeCooldown = 1f;
 
     private CharControler charControler;
+    private Rigidbody rb;
     private int attackCount = 0;
     private float lastAttackTime = 0f;
     private float attackCooldown = 0.5f;
+    private bool isEvading = false; 
+    private Vector3 evadeVelocity;
 
     private void Start() {
-        charControler = GetComponent<CharControler>(); 
+        charControler = GetComponent<CharControler>();
+        rb = GetComponent<Rigidbody>(); 
     }
 
     void Update() {
@@ -29,8 +35,8 @@ public class playerCombat : MonoBehaviour {
             PerformFastAttack();
         } else if (Input.GetButtonDown("Fire2")) {
             PerformMidSlowAttack();
-        } else if (Input.GetButtonDown("Evade")) {
-            PerformEvade();
+        } else if (Input.GetButtonDown("Evade") && !isEvading) {
+            StartCoroutine(PerformEvade());
         }
     }
 
@@ -55,14 +61,26 @@ public class playerCombat : MonoBehaviour {
         Debug.Log("mid slow attack");
     }
 
-    void PerformEvade() {
-        animator.SetTrigger("Evade");
+    IEnumerator PerformEvade() {
+        isEvading = true;
         Debug.Log("evading");
+
         Vector3 isoInputDirection = charControler.GetIsoInputDirection();
         if (isoInputDirection != Vector3.zero) {
-            Vector3 evadePosition = transform.position + isoInputDirection * evadeDistance;
-            transform.position = evadePosition;
+            evadeVelocity = isoInputDirection * (evadeDistance / evadeDuration);
+            float elapsedTime = 0f;
+
+            while (elapsedTime < evadeDuration) {
+                rb.velocity = evadeVelocity;
+                elapsedTime += Time.fixedDeltaTime;
+                yield return new WaitForFixedUpdate();
+            }
+
+            rb.velocity = Vector3.zero; 
         }
+
+        yield return new WaitForSeconds(evadeCooldown);
+        isEvading = false;
     }
 
     void ApplyFastAttackDamage() {

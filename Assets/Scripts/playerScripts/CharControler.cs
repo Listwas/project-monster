@@ -19,7 +19,7 @@ public class CharControler : MonoBehaviour {
     }
 
     private void GatherInput() {
-        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
     }
 
     private void Look() {
@@ -30,7 +30,8 @@ public class CharControler : MonoBehaviour {
     }
 
     private void Move() {
-        rb.MovePosition(transform.position + input.ToIso() * input.normalized.magnitude * speed * Time.deltaTime);
+        Vector3 moveDirection = input.ToIso().normalized * speed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + moveDirection);
     }
 
     public Vector3 GetIsoInputDirection() {
@@ -40,5 +41,6 @@ public class CharControler : MonoBehaviour {
 
 public static class Helpers {
     private static Matrix4x4 isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+
     public static Vector3 ToIso(this Vector3 input) => isoMatrix.MultiplyPoint3x4(input);
 }
