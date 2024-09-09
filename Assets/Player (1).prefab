@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &835202591490067048
+--- !u!1 &2865953234279648087
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,29 +8,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 227510994266309680}
-  - component: {fileID: 683045826781422274}
-  - component: {fileID: 4555343788888463896}
-  - component: {fileID: 3605249745264269243}
-  - component: {fileID: 4077264083936984389}
-  - component: {fileID: 8331890914883921380}
-  - component: {fileID: 189784630518524569}
-  - component: {fileID: 6386799660761578566}
-  - component: {fileID: 8607902930466222094}
+  - component: {fileID: 8115695201239022272}
+  - component: {fileID: 8013751771891284485}
+  - component: {fileID: 6090842581926302436}
+  - component: {fileID: 7305222712266964833}
+  - component: {fileID: 5551356296356890388}
+  - component: {fileID: 5665271028914428409}
+  - component: {fileID: 4385635203539174611}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player (1)
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &227510994266309680
+--- !u!4 &8115695201239022272
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835202591490067048}
+  m_GameObject: {fileID: 2865953234279648087}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 30.7, y: 1.2, z: 40.711678}
@@ -39,21 +37,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &683045826781422274
+--- !u!33 &8013751771891284485
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835202591490067048}
+  m_GameObject: {fileID: 2865953234279648087}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4555343788888463896
+--- !u!23 &6090842581926302436
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835202591490067048}
+  m_GameObject: {fileID: 2865953234279648087}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -89,13 +87,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3605249745264269243
+--- !u!136 &7305222712266964833
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835202591490067048}
+  m_GameObject: {fileID: 2865953234279648087}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -112,13 +110,13 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &4077264083936984389
+--- !u!54 &5551356296356890388
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835202591490067048}
+  m_GameObject: {fileID: 2865953234279648087}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -139,62 +137,14 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 100
   m_CollisionDetection: 0
---- !u!114 &8331890914883921380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835202591490067048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2b27b0c3031212498aefa99a7ef13b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 4077264083936984389}
-  model: {fileID: 227510994266309680}
-  speed: 15
-  turnSpeed: 1000
---- !u!114 &189784630518524569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835202591490067048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b45494d6553e93d4caaeb845a5744ae8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 8607902930466222094}
-  fastAttackRange: 2
-  midSlowAttackRange: 3
-  fastAttackDamage: 5
-  midSlowAttackDamage: 10
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!114 &6386799660761578566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835202591490067048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d35b170c1a31e5145a69e4f516d362fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &8607902930466222094
+--- !u!95 &5665271028914428409
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835202591490067048}
+  m_GameObject: {fileID: 2865953234279648087}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5fdec0a5a33666c4f9f3731b8305fa21, type: 2}
@@ -208,3 +158,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4385635203539174611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865953234279648087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3ca04cb24f06634d8f74596c5c3fa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 5551356296356890388}
+  model: {fileID: 8115695201239022272}
+  speed: 5
+  turnSpeed: 360
+  animator: {fileID: 5665271028914428409}
+  fastAttackRange: 2
+  midSlowAttackRange: 3
+  fastAttackDamage: 5
+  midSlowAttackDamage: 10
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  evadeDistance: 10
+  evadeDuration: 0.25
+  evadeCooldown: 1
