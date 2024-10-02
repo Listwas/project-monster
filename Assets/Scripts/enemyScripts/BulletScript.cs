@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Player") {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Obstacle") {
             Destroy(gameObject);
         }
     }

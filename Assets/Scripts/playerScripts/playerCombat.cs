@@ -86,14 +86,14 @@ public class playerCombat : MonoBehaviour {
     void ApplyFastAttackDamage() {
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position + transform.forward, fastAttackRange, enemyLayers);
         foreach (Collider enemy in hitEnemies) {
-            enemy.GetComponent<enemyScript>().TakeDamage(fastAttackDamage);
+            enemy.GetComponent<EnemyScript>().TakeDamage(fastAttackDamage);
         }
     }
 
     void ApplyMidSlowAttackDamage() {
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position + transform.forward, midSlowAttackRange, enemyLayers);
         foreach (Collider enemy in hitEnemies) {
-            enemy.GetComponent<enemyScript>().TakeDamage(midSlowAttackDamage);
+            enemy.GetComponent<EnemyScript>().TakeDamage(midSlowAttackDamage);
         }
     }
 
