@@ -19,14 +19,6 @@ public class third_person_movement : MonoBehaviour
     public int fastAttackDamage = 5;
     public int midSlowAttackDamage = 10;
     public LayerMask enemyLayers;
-
-    [Header("Evade Settings")]
-    public float evadeDistance = 10f;
-    public float evadeDuration = 0.2f;
-    public float evadeCooldown = 1f;
-    private bool isEvading = false;
-    private float evadeEndTime = 0f;
-
     private int attackCount = 0;
     private float lastAttackTime = 0f;
     private float attackCooldown = 0.5f;
@@ -42,19 +34,14 @@ public class third_person_movement : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         }
         currentHealth = maxHealth; 
-
     }
 
     void Update()
     {
         HandleMovement();
 
-        if (!isEvading)
-        {
-            HandleInput(); 
-        }
-
-        CheckEvadeCooldown();
+        
+        HandleInput();         
     }
 
     private void HandleMovement()
@@ -85,10 +72,7 @@ public class third_person_movement : MonoBehaviour
         {
             PerformMidSlowAttack();
         }
-        else if (Input.GetButtonDown("Evade") && !isEvading)
-        {
-            StartCoroutine(PerformEvade());
-        }
+
     }
 
     private void PerformFastAttack()
@@ -119,10 +103,19 @@ public class third_person_movement : MonoBehaviour
 
         foreach (Collider enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyScript>().TakeDamage(fastAttackDamage);
-            Debug.Log("Enemy hit with fast attack. Damage: " + fastAttackDamage);
+            EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
+            if (enemyScript != null)
+            {
+                enemyScript.TakeDamage(fastAttackDamage);
+                Debug.Log("Enemy hit with fast attack. Damage: " + fastAttackDamage);
+            }
+            else
+            {
+                Debug.LogWarning("No EnemyScript found on hit enemy object: " + enemy.name);
+            }
         }
     }
+
 
     private void ApplyMidSlowAttackDamage()
     {
@@ -140,37 +133,6 @@ public class third_person_movement : MonoBehaviour
         }
     }
 
-    private IEnumerator PerformEvade()
-    {
-        isEvading = true;
-
-        Vector3 inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        if (inputDirection != Vector3.zero)
-        {
-            Vector3 evadeVelocity = inputDirection * (evadeDistance / evadeDuration);
-            float elapsedTime = 0f;
-
-            while (elapsedTime < evadeDuration)
-            {
-                rb.velocity = evadeVelocity;  
-                elapsedTime += Time.fixedDeltaTime;
-                yield return new WaitForFixedUpdate();
-            }
-        }
-
-        evadeEndTime = Time.time + evadeCooldown;
-        isEvading = false;
-        rb.velocity = Vector3.zero; 
-    }
-
-    private void CheckEvadeCooldown()
-    {
-        if (isEvading && Time.time > evadeEndTime)
-        {
-            isEvading = false;
-        }
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -182,16 +144,20 @@ public class third_person_movement : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (currentHealth >= 0){
+        if (currentHealth >= 0)
+        {
             Debug.Log("Player took " + damage + " damage. Current health: " + currentHealth);
-
-        } else{Die();};
-        
+        }
+        else
+        {
+            Die();
+        }
     }
 
     void Die()
     {
-        if (currentHealth >= 0) {
+        if (currentHealth < 0)
+        {
             Debug.Log("Player died!");
         }
     }
