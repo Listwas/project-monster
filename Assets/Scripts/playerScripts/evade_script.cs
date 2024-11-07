@@ -20,19 +20,23 @@ public class PlayerEvade : MonoBehaviour
 
     private void HandleEvadeInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isEvading)
+        if (Input.GetButtonDown("EvadeButton") || Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Evade input detected");
-            StartCoroutine(PerformEvade());
+            if (!isEvading)
+            {
+                Debug.Log("Evade input detected");
+                StartCoroutine(PerformEvade());
+            }
         }
     }
+
 
     private IEnumerator PerformEvade()
     {
         Debug.Log("Evade initiated.");
         isEvading = true;
 
-        evadeDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        evadeDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 
         if (evadeDirection == Vector3.zero)
         {

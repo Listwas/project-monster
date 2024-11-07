@@ -5,7 +5,7 @@ public class third_person_movement : MonoBehaviour
 {
     public CharacterController controller;
     public Transform cam;
-    public Rigidbody rb; 
+    public Rigidbody rb;
     public float speed = 12f;
 
     public Animator animator;
@@ -33,14 +33,13 @@ public class third_person_movement : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
-        currentHealth = maxHealth; 
+        currentHealth = maxHealth;
     }
 
     void Update()
     {
         HandleMovement();
-
-        HandleInput();         
+        HandleInput();
     }
 
     private void HandleMovement()
@@ -56,22 +55,27 @@ public class third_person_movement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
+        }
+        else
+        {
+            controller.Move(Vector3.zero);
         }
     }
 
+
     private void HandleInput()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("FastAttackButton") || Input.GetKeyDown(KeyCode.Q)) // replace "Q" with your preferred key for fast attack
         {
             PerformFastAttack();
         }
-        else if (Input.GetButtonDown("Fire2"))
+        else if (Input.GetButtonDown("MidSlowAttackButton") || Input.GetKeyDown(KeyCode.E)) // replace "E" with your preferred key for mid/slow attack
         {
             PerformMidSlowAttack();
         }
     }
+
 
     private void PerformFastAttack()
     {
