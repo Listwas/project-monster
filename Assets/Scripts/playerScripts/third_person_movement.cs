@@ -40,7 +40,6 @@ public class third_person_movement : MonoBehaviour
     {
         HandleMovement();
 
-        
         HandleInput();         
     }
 
@@ -72,7 +71,6 @@ public class third_person_movement : MonoBehaviour
         {
             PerformMidSlowAttack();
         }
-
     }
 
     private void PerformFastAttack()
@@ -115,7 +113,6 @@ public class third_person_movement : MonoBehaviour
             }
         }
     }
-
 
     private void ApplyMidSlowAttackDamage()
     {

@@ -256,6 +256,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2192959915686597069, guid: 44a613df266c97d91a0a8654d5b1c602, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7378594657849622462}
+    - targetCorrespondingSourceObject: {fileID: 2192959915686597069, guid: 44a613df266c97d91a0a8654d5b1c602, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7378594657849622463}
   m_SourcePrefab: {fileID: 100100000, guid: 44a613df266c97d91a0a8654d5b1c602, type: 3}
 --- !u!1001 &3204104916878368184
 PrefabInstance:
@@ -381,11 +384,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2288391744452019218, guid: 0ae419f02305da5a9aa34786caf700ad, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.973249
       objectReference: {fileID: 0}
     - target: {fileID: 2288391744452019218, guid: 0ae419f02305da5a9aa34786caf700ad, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.22975294
       objectReference: {fileID: 0}
     - target: {fileID: 2693080796487442855, guid: 0ae419f02305da5a9aa34786caf700ad, type: 3}
       propertyPath: m_XDamping
@@ -482,6 +485,18 @@ MonoBehaviour:
   evadeDistance: 10
   evadeDuration: 0.2
   evadeCooldown: 1
+--- !u!114 &7378594657849622463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144025664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601dac51426d474c0ad1bfabc167a90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8906221571411919961
 PrefabInstance:
   m_ObjectHideFlags: 0
