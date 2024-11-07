@@ -3,68 +3,67 @@ using UnityEngine;
 
 public class PlayerEvade : MonoBehaviour
 {
-    public CharacterController controller;
-    public float evadeDistance = 10f;
-    public float evadeDuration = 0.2f;
-    public float evadeCooldown = 1f;
-    private bool isEvading = false;
-    private float evadeEndTime = 0f;
+    public CharacterController character_controller;
+    public float evade_travel_distance = 10f;
+    public float evade_time = 0.2f;
+    public float evade_cooldown = 1f;
+    private bool is_evading_in_progress = false;
+    private float next_evade_allowed_time = 0f;
 
-    private Vector3 evadeDirection;
+    private Vector3 evade_movement_direction;
 
     void Update()
     {
-        HandleEvadeInput();
-        CheckEvadeCooldown();
+        check_for_evade_input();
+        reset_evade_state_if_necessary();
     }
 
-    private void HandleEvadeInput()
+    private void check_for_evade_input()
     {
         if (Input.GetButtonDown("EvadeButton") || Input.GetKeyDown(KeyCode.Space))
         {
-            if (!isEvading)
+            if (!is_evading_in_progress)
             {
                 Debug.Log("Evade input detected");
-                StartCoroutine(PerformEvade());
+                StartCoroutine(execute_evade_movement());
             }
         }
     }
 
-
-    private IEnumerator PerformEvade()
+    private IEnumerator execute_evade_movement()
     {
         Debug.Log("Evade initiated.");
-        isEvading = true;
+        is_evading_in_progress = true;
 
-        evadeDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+        evade_movement_direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 
-        if (evadeDirection == Vector3.zero)
+        if (evade_movement_direction == Vector3.zero)
         {
-            evadeDirection = -transform.forward;
+            evade_movement_direction = -transform.forward;
         }
 
-        Debug.Log("Evade direction: " + evadeDirection);
+        Debug.Log("Evade direction: " + evade_movement_direction);
 
-        float evadeSpeed = evadeDistance / evadeDuration;
-        float elapsedTime = 0f;
+        float evade_speed = evade_travel_distance / evade_time;
+        float elapsed_time = 0f;
 
-        while (elapsedTime < evadeDuration)
+        while (elapsed_time < evade_time)
         {
-            controller.Move(evadeDirection * evadeSpeed * Time.deltaTime);
-            elapsedTime += Time.deltaTime;
+            character_controller.Move(evade_movement_direction * evade_speed * Time.deltaTime);
+            elapsed_time += Time.deltaTime;
             yield return null;
         }
 
-        evadeEndTime = Time.time + evadeCooldown;
+        next_evade_allowed_time = Time.time + evade_cooldown;
         Debug.Log("Evade completed. Cooldown starts.");
-        isEvading = false;
+        is_evading_in_progress = false;
     }
 
-    private void CheckEvadeCooldown()
+    private void reset_evade_state_if_necessary()
     {
-        if (isEvading && Time.time > evadeEndTime)
+        if (is_evading_in_progress && Time.time > next_evade_allowed_time)
         {
-            isEvading = false;
+            is_evading_in_progress = false;
         }
     }
 }

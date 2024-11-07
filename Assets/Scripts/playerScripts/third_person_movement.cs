@@ -1,48 +1,48 @@
 using System.Collections;
 using UnityEngine;
 
-public class third_person_movement : MonoBehaviour
+public class ThirdPersonMovement : MonoBehaviour
 {
-    public CharacterController controller;
-    public Transform cam;
-    public Rigidbody rb;
-    public float speed = 12f;
+    public CharacterController character_controller;
+    public Transform camera_transform;
+    public Rigidbody rigid_body;
+    public float movement_speed = 12f;
 
     public Animator animator;
 
-    public float turnSmoothTime = 0.1f;
-    private float turnSmoothVelocity;
+    public float rotation_smooth_time = 0.1f;
+    private float current_rotation_velocity;
 
     [Header("Combat Settings")]
-    public float fastAttackRange = 2f;
-    public float midSlowAttackRange = 3f;
-    public int fastAttackDamage = 5;
-    public int midSlowAttackDamage = 10;
-    public LayerMask enemyLayers;
-    private int attackCount = 0;
-    private float lastAttackTime = 0f;
-    private float attackCooldown = 0.5f;
+    public float light_attack_range = 2f;
+    public float heavy_attack_range = 3f;
+    public int light_attack_damage = 5;
+    public int heavy_attack_damage = 10;
+    public LayerMask enemy_layers;
+    private int consecutive_attack_count = 0;
+    private float previous_attack_timestamp = 0f;
+    private float attack_rest_period = 0.5f;
 
     [Header("Health Settings")]
-    public int maxHealth = 100;
-    private int currentHealth;
+    public int max_health = 100;
+    private int current_health;
 
     void Start()
     {
-        if (rb == null)
+        if (rigid_body == null)
         {
-            rb = GetComponent<Rigidbody>();
+            rigid_body = GetComponent<Rigidbody>();
         }
-        currentHealth = maxHealth;
+        current_health = max_health;
     }
 
     void Update()
     {
-        HandleMovement();
-        HandleInput();
+        process_player_movement();
+        process_player_input();
     }
 
-    private void HandleMovement()
+    private void process_player_movement()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -50,66 +50,64 @@ public class third_person_movement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            float target_angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera_transform.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, target_angle, ref current_rotation_velocity, rotation_smooth_time);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            Vector3 move_dir = Quaternion.Euler(0f, target_angle, 0f) * Vector3.forward;
+            character_controller.Move(move_dir.normalized * movement_speed * Time.deltaTime);
         }
         else
         {
-            controller.Move(Vector3.zero);
+            character_controller.Move(Vector3.zero);
         }
     }
 
-
-    private void HandleInput()
+    private void process_player_input()
     {
-        if (Input.GetButtonDown("FastAttackButton") || Input.GetKeyDown(KeyCode.Q)) // replace "Q" with your preferred key for fast attack
+        if (Input.GetButtonDown("FastAttackButton") || Input.GetKeyDown(KeyCode.Q))
         {
-            PerformFastAttack();
+            execute_light_attack();
         }
-        else if (Input.GetButtonDown("MidSlowAttackButton") || Input.GetKeyDown(KeyCode.E)) // replace "E" with your preferred key for mid/slow attack
+        else if (Input.GetButtonDown("MidSlowAttackButton") || Input.GetKeyDown(KeyCode.E))
         {
-            PerformMidSlowAttack();
+            execute_heavy_attack();
         }
     }
 
-
-    private void PerformFastAttack()
+    private void execute_light_attack()
     {
-        if (Time.time - lastAttackTime < attackCooldown) return;
+        if (Time.time - previous_attack_timestamp < attack_rest_period) return;
 
-        attackCount = (attackCount % 3) + 1;
-        animator.SetTrigger("FastAttack" + attackCount);
-        lastAttackTime = Time.time;
+        consecutive_attack_count = (consecutive_attack_count % 3) + 1;
+        animator.SetTrigger("FastAttack" + consecutive_attack_count);
+        previous_attack_timestamp = Time.time;
 
-        ApplyFastAttackDamage();
+        apply_light_attack_damage();
     }
 
-    private void PerformMidSlowAttack()
+    private void execute_heavy_attack()
     {
         animator.SetTrigger("MidSlowAttack");
-        ApplyMidSlowAttackDamage();
+        apply_heavy_attack_damage();
     }
 
-    private void ApplyFastAttackDamage()
+    private void apply_light_attack_damage()
     {
-        Collider[] hitEnemies = Physics.OverlapSphere(transform.position + transform.forward, fastAttackRange, enemyLayers);
+        Collider[] hit_enemies = Physics.OverlapSphere(transform.position + transform.forward, light_attack_range, enemy_layers);
 
-        if (hitEnemies.Length == 0)
+        if (hit_enemies.Length == 0)
         {
             Debug.Log("Fast attack hit nothing.");
         }
 
-        foreach (Collider enemy in hitEnemies)
+        foreach (Collider enemy in hit_enemies)
         {
-            EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
-            if (enemyScript != null)
+            EnemyScript enemy_script = enemy.GetComponent<EnemyScript>();
+            if (enemy_script != null)
             {
-                enemyScript.TakeDamage(fastAttackDamage);
-                Debug.Log("Enemy hit with fast attack. Damage: " + fastAttackDamage);
+                enemy_script.TakeDamage(light_attack_damage);
+                Debug.Log("Enemy hit with fast attack. Damage: " + light_attack_damage);
             }
             else
             {
@@ -118,36 +116,28 @@ public class third_person_movement : MonoBehaviour
         }
     }
 
-    private void ApplyMidSlowAttackDamage()
+    private void apply_heavy_attack_damage()
     {
-        Collider[] hitEnemies = Physics.OverlapSphere(transform.position + transform.forward, midSlowAttackRange, enemyLayers);
+        Collider[] hit_enemies = Physics.OverlapSphere(transform.position + transform.forward, heavy_attack_range, enemy_layers);
 
-        if (hitEnemies.Length == 0)
+        if (hit_enemies.Length == 0)
         {
             Debug.Log("Mid/Slow attack hit nothing.");
         }
 
-        foreach (Collider enemy in hitEnemies)
+        foreach (Collider enemy in hit_enemies)
         {
-            enemy.GetComponent<EnemyScript>().TakeDamage(midSlowAttackDamage);
-            Debug.Log("Enemy hit with mid/slow attack. Damage: " + midSlowAttackDamage);
+            enemy.GetComponent<EnemyScript>().TakeDamage(heavy_attack_damage);
+            Debug.Log("Enemy hit with mid/slow attack. Damage: " + heavy_attack_damage);
         }
     }
 
-    private void OnDrawGizmosSelected()
+    public void TakeDamage(int damage_amount)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + transform.forward * fastAttackRange, fastAttackRange);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position + transform.forward * midSlowAttackRange, midSlowAttackRange);
-    }
-
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth >= 0)
+        current_health -= damage_amount;
+        if (current_health >= 0)
         {
-            Debug.Log("Player took " + damage + " damage. Current health: " + currentHealth);
+            Debug.Log("Player took " + damage_amount + " damage. Current health: " + current_health);
         }
         else
         {
@@ -157,7 +147,7 @@ public class third_person_movement : MonoBehaviour
 
     void Die()
     {
-        if (currentHealth < 0)
+        if (current_health < 0)
         {
             Debug.Log("Player died!");
         }
