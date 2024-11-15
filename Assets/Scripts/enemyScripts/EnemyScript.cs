@@ -17,10 +17,14 @@ public class EnemyScript : MonoBehaviour
     private Transform player;
     private float nextShootTime;
 
+
+    public spawningBlood blood;
+
     void Start()
     {
         currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        blood = FindObjectOfType<spawningBlood>();
     }
 
     void Update()
@@ -87,8 +91,14 @@ public class EnemyScript : MonoBehaviour
     }
 
     void Die()
-    {
+    {   
+        Vector3 enemyPosition = transform.position;
+        if(blood != null)
+        {
+            blood.SpawnBloodAt(enemyPosition);
+        }
         Debug.Log("Enemy died!");
         Destroy(gameObject);
+    
     }
 }
