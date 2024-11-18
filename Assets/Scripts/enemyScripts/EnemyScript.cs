@@ -92,7 +92,7 @@ public class EnemyScript : MonoBehaviour
 
     void Die()
     {   
-        Vector3 enemyPosition = transform.position;
+        Vector3 enemyPosition = new Vector3(transform.position.x, 0, transform.position.z);
         if(blood != null)
         {
             blood.SpawnBloodAt(enemyPosition);
