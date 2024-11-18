@@ -8,15 +8,6 @@ public class spawningBlood : MonoBehaviour
     public int bloodDropChance = 100;
     public int bloodDestructionTime;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-
-    }
     public void SpawnBloodAt(Vector3 enemyPosition)
     {
         int randomNum = Random.Range(1, 101);
