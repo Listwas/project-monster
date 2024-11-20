@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1593361255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7332706203813897178, guid: c59367669635735bf9fa787b292344cf, type: 3}
+  m_PrefabInstance: {fileID: 938815804965876715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &757324942228586601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -204,9 +209,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 298343297238260861, guid: c59367669635735bf9fa787b292344cf, type: 3}
+      propertyPath: max_health
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 298343297238260861, guid: c59367669635735bf9fa787b292344cf, type: 3}
       propertyPath: camera_transform
       value: 
       objectReference: {fileID: 5548536737135529032}
+    - target: {fileID: 298343297238260861, guid: c59367669635735bf9fa787b292344cf, type: 3}
+      propertyPath: heavy_attack_range
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 298343297238260861, guid: c59367669635735bf9fa787b292344cf, type: 3}
+      propertyPath: light_attack_range
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2256859311474134460, guid: c59367669635735bf9fa787b292344cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.74
@@ -254,13 +271,54 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7332706203813897178, guid: c59367669635735bf9fa787b292344cf, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 950415219373210427}
   m_SourcePrefab: {fileID: 100100000, guid: c59367669635735bf9fa787b292344cf, type: 3}
 --- !u!4 &950415219373210426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2256859311474134460, guid: c59367669635735bf9fa787b292344cf, type: 3}
   m_PrefabInstance: {fileID: 938815804965876715}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &950415219373210427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593361255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85989f0cc1e36929e83d36ec9015c0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combos:
+  - comboPattern: HeavyHeavyHeavy
+    damageType: 0
+    damage: 50
+  - comboPattern: LightHeavyLight
+    damageType: 1
+    damage: 50
+  - comboPattern: HeavyHeavyLight
+    damageType: 0
+    damage: 50
+  - comboPattern: HeavyLightHeavy
+    damageType: 0
+    damage: 50
+  - comboPattern: LightHeavyHeavy
+    damageType: 1
+    damage: 50
+  - comboPattern: LightLightHeavy
+    damageType: 1
+    damage: 50
+  - comboPattern: LightHeavyLight
+    damageType: 1
+    damage: 50
+  - comboPattern: HeavyLightLight
+    damageType: 0
+    damage: 50
+  combo_reset_time: 2
 --- !u!1001 &1141546341194504596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -488,6 +546,10 @@ PrefabInstance:
     - target: {fileID: 7746237755073294076, guid: 8aa541b236274f4c9869ee37f69f0ba0, type: 3}
       propertyPath: m_Name
       value: Soldier 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9048533936379079813, guid: 8aa541b236274f4c9869ee37f69f0ba0, type: 3}
+      propertyPath: maxHealth
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

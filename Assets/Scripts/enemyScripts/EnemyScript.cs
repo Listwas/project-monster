@@ -79,7 +79,7 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Enemy took " + damage + " damage. Current health: " + currentHealth);
+        // Debug.Log("enemy took " + damage + " damage. Current health: " + currentHealth);
 
         if (currentHealth <= 0) {
             Die();
@@ -88,7 +88,7 @@ public class EnemyScript : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Enemy died!");
+        Debug.Log("enemy died!");
         Destroy(gameObject);
     }
 }
