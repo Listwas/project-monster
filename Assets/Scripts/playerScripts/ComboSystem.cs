@@ -12,6 +12,10 @@ public class Combo
 
 public class ComboSystem : MonoBehaviour
 {
+    [Header("Debug log enabler")]
+    public bool comboMatchedDebug;
+    public bool comboTimeoutDebug;
+    public bool noticeAttackDebug;
     // damage types
     public enum AttackType { Light, Heavy }
     public enum DamageType { Blunt, Slash }
@@ -53,14 +57,18 @@ public class ComboSystem : MonoBehaviour
     public void RegisterAttack(AttackType attackType) {
         if (Time.time - last_attack_time > combo_reset_time)
         {
-            // Debug.Log("combo timeout");
+            if (comboTimeoutDebug) {
+                Debug.Log("combo timeout");
+            }
             current_combo.Clear();
         }
 
         current_combo.Add(attackType); // add attack to the chain
         last_attack_time = Time.time;
 
-        // Debug.Log($"noticed attack: {attackType}. current combo: {string.Join("", current_combo)}");
+        if (noticeAttackDebug) {
+            Debug.Log($"noticed attack: {attackType}. current combo: {string.Join("", current_combo)}");
+        }
 
         CheckCombo();
     }
@@ -70,13 +78,13 @@ public class ComboSystem : MonoBehaviour
         if (current_combo.Count == 3)
         {
             string comboKey = string.Join("", current_combo);
-            // Debug.Log($"checking combo: {comboKey}");
-
 
             // execute combo event when combo chain matches 
             if (comboDictionary.TryGetValue(comboKey, out var comboData))
             {
-                Debug.Log($"combo matched: {comboKey}, DamageType: {comboData.damageType}, Damage: {comboData.damage}");
+                if (comboMatchedDebug) {
+                    Debug.Log($"combo matched: {comboKey}, DamageType: {comboData.damageType}, Damage: {comboData.damage}");
+                }
                 OnComboExecuted?.Invoke(comboData.damageType, comboData.damage);
             }
             else

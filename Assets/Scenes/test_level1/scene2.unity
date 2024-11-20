@@ -293,6 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85989f0cc1e36929e83d36ec9015c0bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  comboMatchedDebug: 1
+  comboTimeoutDebug: 1
+  noticeAttackDebug: 1
   combos:
   - comboPattern: HeavyHeavyHeavy
     damageType: 0

@@ -34,6 +34,14 @@ public class ThirdPersonMovement : MonoBehaviour
     private float last_light_attack_time;
     private float last_heavy_attack_time;
 
+    [Header("Debug log enabler")]
+
+    public bool lightAttackDebug;
+    public bool heavyAttackDebug;
+    public bool comboExecutedDebug;
+    public bool showAttackRange;
+    public bool takenDamageDebug;
+
     void Start()
     {
         if (rigid_body == null)
@@ -56,7 +64,10 @@ public class ThirdPersonMovement : MonoBehaviour
     // combo logic
     private void ExecuteComboEffect(ComboSystem.DamageType damageType, int totalDamage)
     {
-        Debug.Log($"combo executed: {damageType}, total damage: {totalDamage}");
+        if (comboExecutedDebug) {
+            Debug.Log($"combo executed: {damageType}, total damage: {totalDamage}");
+        }
+
         apply_attack_damage(totalDamage, damageType == ComboSystem.DamageType.Slash ? light_attack_range : heavy_attack_range);
     }
     // ------------------------------------------------------
@@ -104,20 +115,27 @@ public class ThirdPersonMovement : MonoBehaviour
             }
         }
     }
-    private void execute_light_attack()
+
+    private void execute_light_attack() 
     {
         comboSystem.RegisterAttack(ComboSystem.AttackType.Light);
         bool hit_enemy = apply_attack_damage(light_attack_damage, light_attack_range);
-        // Debug.Log($"Light Attack: Damage={light_attack_damage}, Cooldown={light_attack_cooldown}s, Hit={(hit_enemy ? "enemy" : "nothing")}");
         animator.SetTrigger("fast attack");
+
+        if (lightAttackDebug) {
+            Debug.Log($"Light Attack: Damage={light_attack_damage}, Cooldown={light_attack_cooldown}s, Hit={(hit_enemy ? "enemy" : "nothing")}");
+        }
     }
 
     private void execute_heavy_attack()
     {
         comboSystem.RegisterAttack(ComboSystem.AttackType.Heavy);
         bool hit_enemy = apply_attack_damage(heavy_attack_damage, heavy_attack_range);
-        // Debug.Log($"Heavy Attack: Damage={heavy_attack_damage}, Cooldown={heavy_attack_cooldown}s, Hit={(hit_enemy ? "enemy" : "nothing")}");
         animator.SetTrigger("heavy attack");
+
+        if (heavyAttackDebug) {
+            Debug.Log($"Heavy Attack: Damage={heavy_attack_damage}, Cooldown={heavy_attack_cooldown}s, Hit={(hit_enemy ? "enemy" : "nothing")}");
+        }
     }
     // ------------------------------------------------------
 
@@ -152,7 +170,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (current_health > 0)
         {
-            Debug.Log("player took " + damage_amount + " damage. Current health: " + current_health);
+            if (takenDamageDebug) {
+                Debug.Log("player took " + damage_amount + " damage. Current health: " + current_health);
+            }
         }
         else
         {
@@ -168,11 +188,13 @@ public class ThirdPersonMovement : MonoBehaviour
     // show range of attacks
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position + transform.forward, light_attack_range);
+        if (showAttackRange) {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position + transform.forward, light_attack_range);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + transform.forward, heavy_attack_range);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position + transform.forward, heavy_attack_range);
+        }
     }
     // ------------------------------------------------------
 }
