@@ -132,6 +132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1365987084}
   - component: {fileID: 1365987083}
+  - component: {fileID: 1365987086}
+  - component: {fileID: 1365987085}
   m_Layer: 0
   m_Name: Blood Manager
   m_TagString: Untagged
@@ -169,6 +171,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1365987085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365987082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6f82f7326695f4391bd354d56a06d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockMovementTime: 5
+--- !u!114 &1365987086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365987082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68f60362cec19834c905ecab75340807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodOnPlayer: 0
+  bloodPoints: 5
+  bloodPointsFearMode: 50
+  fearModeTime: 10
 --- !u!1 &1593361255 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7332706203813897178, guid: c59367669635735bf9fa787b292344cf, type: 3}
@@ -187,7 +218,7 @@ GameObject:
   - component: {fileID: 2060199530}
   - component: {fileID: 2060199529}
   - component: {fileID: 2060199528}
-  - component: {fileID: 2060199527}
+  - component: {fileID: 2060199533}
   m_Layer: 8
   m_Name: blood
   m_TagString: Untagged
@@ -195,20 +226,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2060199527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2060199526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71d70649da343c4ebc443cd68000de7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  evade: {fileID: 0}
-  moveBlockTime: 5
 --- !u!54 &2060199528
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -255,8 +272,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 24.44907, z: 0.99414337}
-  m_Center: {x: 0, y: 11.724526, z: -0.0029278288}
+  m_Size: {x: 0.98023546, y: 24.493841, z: 1.00064}
+  m_Center: {x: -0.01236654, y: 11.74691, z: 0.005903739}
 --- !u!23 &2060199530
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -316,12 +333,26 @@ Transform:
   m_GameObject: {fileID: 2060199526}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.1, y: 0, z: 15.05}
+  m_LocalPosition: {x: 5.1, y: 0, z: 14.87}
   m_LocalScale: {x: 4.38999, y: 0.082612, z: 4.8743486}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2060199533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060199526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94641f23fd16ea9449da29c454df8142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopScript: {fileID: 0}
+  countScript: {fileID: 0}
 --- !u!1001 &757324942228586601
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -66,14 +66,16 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\playerScripts\old\CharControler.cs" />
     <Compile Include="Assets\Scripts\enemyScripts\BulletScript.cs" />
-    <Compile Include="Assets\stopPlayerMovement.cs" />
     <Compile Include="Assets\Scripts\playerScripts\old\playerCombat.cs" />
     <Compile Include="Assets\Scripts\playerScripts\ComboSystem.cs" />
+    <Compile Include="Assets\Scripts\blood\bloodCount.cs" />
     <Compile Include="Assets\GamePadMove.cs" />
     <Compile Include="Assets\Scripts\playerScripts\old\PlayerController.cs" />
-    <Compile Include="Assets\spawningBlood.cs" />
+    <Compile Include="Assets\Scripts\blood\collisionWithPlayer.cs" />
     <Compile Include="Assets\Scripts\playerScripts\evade_script.cs" />
     <Compile Include="Assets\Scripts\enemyScripts\EnemyScript.cs" />
+    <Compile Include="Assets\Scripts\blood\spawningBlood.cs" />
+    <Compile Include="Assets\Scripts\blood\stopPlayerMove.cs" />
     <Compile Include="Assets\Scripts\playerScripts\third_person_movement.cs" />
   </ItemGroup>
   <ItemGroup>
