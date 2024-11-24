@@ -4,28 +4,43 @@ using UnityEngine;
 public class ThirdPersonMovement : MonoBehaviour
 {
     public CharacterController character_controller;
+    public ComboSystem comboSystem;
     public Transform camera_transform;
     public Rigidbody rigid_body;
-    public float movement_speed = 12f;
-
     public Animator animator;
-
-    public float rotation_smooth_time = 0.1f;
     private float current_rotation_velocity;
 
     [Header("Combat Settings")]
-    public float light_attack_range = 2f;
-    public float heavy_attack_range = 3f;
+    [Header("light attack")]
     public int light_attack_damage = 5;
-    public int heavy_attack_damage = 10;
-    public LayerMask enemy_layers;
-    private int consecutive_attack_count = 0;
-    private float previous_attack_timestamp = 0f;
-    private float attack_rest_period = 0.5f;
+    public float light_attack_range = 2f;
+    public float light_attack_cooldown = 0.5f;
 
-    [Header("Health Settings")]
+    [Header("heavy attack")]
+    public int heavy_attack_damage = 10;
+
+    public float heavy_attack_range = 3f;
+   
+    public float heavy_attack_cooldown = 1.0f;
+
+    public LayerMask enemy_layers;
+
+    [Header("Player Settings")]
     public int max_health = 100;
+    public float movement_speed = 12f;
+    public float rotation_smooth_time = 0.1f;
+
     private int current_health;
+    private float last_light_attack_time;
+    private float last_heavy_attack_time;
+
+    [Header("Debug log enabler")]
+
+    public bool lightAttackDebug;
+    public bool heavyAttackDebug;
+    public bool comboExecutedDebug;
+    public bool showAttackRange;
+    public bool takenDamageDebug;
 
     void Start()
     {
@@ -34,6 +49,10 @@ public class ThirdPersonMovement : MonoBehaviour
             rigid_body = GetComponent<Rigidbody>();
         }
         current_health = max_health;
+
+        // import combo component
+        comboSystem = GetComponent<ComboSystem>();
+        comboSystem.OnComboExecuted += ExecuteComboEffect;
     }
 
     void Update()
@@ -42,6 +61,18 @@ public class ThirdPersonMovement : MonoBehaviour
         process_player_input();
     }
 
+    // combo logic
+    private void ExecuteComboEffect(ComboSystem.DamageType damageType, int totalDamage)
+    {
+        if (comboExecutedDebug) {
+            Debug.Log($"combo executed: {damageType}, total damage: {totalDamage}");
+        }
+
+        apply_attack_damage(totalDamage, damageType == ComboSystem.DamageType.Slash ? light_attack_range : heavy_attack_range);
+    }
+    // ------------------------------------------------------
+
+    // player movement
     private void process_player_movement()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -62,94 +93,108 @@ public class ThirdPersonMovement : MonoBehaviour
             character_controller.Move(Vector3.zero);
         }
     }
-
+    // ------------------------------------------------------
+    
+    //  executing attacks
     private void process_player_input()
     {
-        if (Input.GetButtonDown("FastAttackButton") || Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetButtonDown("LightAttack") || Input.GetKeyDown(KeyCode.Q))
         {
-            execute_light_attack();
+            if (Time.time >= last_light_attack_time + light_attack_cooldown)
+            {
+                execute_light_attack();
+                last_light_attack_time = Time.time;
+            }
         }
-        else if (Input.GetButtonDown("MidSlowAttackButton") || Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetButtonDown("HeavyAttack") || Input.GetKeyDown(KeyCode.E))
         {
-            execute_heavy_attack();
+            if (Time.time >= last_heavy_attack_time + heavy_attack_cooldown)
+            {
+                execute_heavy_attack();
+                last_heavy_attack_time = Time.time;
+            }
         }
     }
 
-    private void execute_light_attack()
+    private void execute_light_attack() 
     {
-        if (Time.time - previous_attack_timestamp < attack_rest_period) return;
+        comboSystem.RegisterAttack(ComboSystem.AttackType.Light);
+        bool hit_enemy = apply_attack_damage(light_attack_damage, light_attack_range);
+        animator.SetTrigger("fast attack");
 
-        consecutive_attack_count = (consecutive_attack_count % 3) + 1;
-        animator.SetTrigger("FastAttack" + consecutive_attack_count);
-        previous_attack_timestamp = Time.time;
-
-        apply_light_attack_damage();
+        if (lightAttackDebug) {
+            Debug.Log($"Light Attack: Damage={light_attack_damage}, Cooldown={light_attack_cooldown}s, Hit={(hit_enemy ? "enemy" : "nothing")}");
+        }
     }
 
     private void execute_heavy_attack()
     {
-        animator.SetTrigger("MidSlowAttack");
-        apply_heavy_attack_damage();
-    }
+        comboSystem.RegisterAttack(ComboSystem.AttackType.Heavy);
+        bool hit_enemy = apply_attack_damage(heavy_attack_damage, heavy_attack_range);
+        animator.SetTrigger("heavy attack");
 
-    private void apply_light_attack_damage()
+        if (heavyAttackDebug) {
+            Debug.Log($"Heavy Attack: Damage={heavy_attack_damage}, Cooldown={heavy_attack_cooldown}s, Hit={(hit_enemy ? "enemy" : "nothing")}");
+        }
+    }
+    // ------------------------------------------------------
+
+    // Apply damage
+    private bool apply_attack_damage(int damage, float range)
     {
-        Collider[] hit_enemies = Physics.OverlapSphere(transform.position + transform.forward, light_attack_range, enemy_layers);
+        Collider[] hit_enemies = Physics.OverlapSphere(transform.position + transform.forward, range, enemy_layers);
 
-        if (hit_enemies.Length == 0)
+        if (hit_enemies.Length > 0)
         {
-            Debug.Log("Fast attack hit nothing.");
-        }
-
-        foreach (Collider enemy in hit_enemies)
-        {
-            EnemyScript enemy_script = enemy.GetComponent<EnemyScript>();
-            if (enemy_script != null)
+            foreach (Collider enemy in hit_enemies)
             {
-                enemy_script.TakeDamage(light_attack_damage);
-                Debug.Log("Enemy hit with fast attack. Damage: " + light_attack_damage);
+                EnemyScript enemy_script = enemy.GetComponent<EnemyScript>();
+                if (enemy_script != null)
+                {
+                    enemy_script.TakeDamage(damage);
+                }
             }
-            else
-            {
-                Debug.LogWarning("No EnemyScript found on hit enemy object: " + enemy.name);
-            }
+            return true; 
         }
+
+        return false;
     }
+    // ------------------------------------------------------
 
-    private void apply_heavy_attack_damage()
-    {
-        Collider[] hit_enemies = Physics.OverlapSphere(transform.position + transform.forward, heavy_attack_range, enemy_layers);
-
-        if (hit_enemies.Length == 0)
-        {
-            Debug.Log("Mid/Slow attack hit nothing.");
-        }
-
-        foreach (Collider enemy in hit_enemies)
-        {
-            enemy.GetComponent<EnemyScript>().TakeDamage(heavy_attack_damage);
-            Debug.Log("Enemy hit with mid/slow attack. Damage: " + heavy_attack_damage);
-        }
-    }
+    // taking damage and dying 
+    private bool has_died = false;
 
     public void TakeDamage(int damage_amount)
     {
         current_health -= damage_amount;
-        if (current_health >= 0)
+
+        if (current_health > 0)
         {
-            Debug.Log("Player took " + damage_amount + " damage. Current health: " + current_health);
+            if (takenDamageDebug) {
+                Debug.Log("player took " + damage_amount + " damage. Current health: " + current_health);
+            }
         }
         else
         {
-            Die();
+            if (!has_died)
+            {
+                has_died = true;
+                Debug.Log("player died!");
+            }
         }
     }
+    // ------------------------------------------------------
 
-    void Die()
+    // show range of attacks
+    void OnDrawGizmos()
     {
-        if (current_health < 0)
-        {
-            Debug.Log("Player died!");
+        if (showAttackRange) {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position + transform.forward, light_attack_range);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position + transform.forward, heavy_attack_range);
         }
     }
+    // ------------------------------------------------------
 }

@@ -17,10 +17,13 @@ public class EnemyScript : MonoBehaviour
     private Transform player;
     private float nextShootTime;
 
+    public spawningBlood blood;
+
     void Start()
     {
         currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        blood = FindObjectOfType<spawningBlood>();
     }
 
     void Update()
@@ -79,7 +82,7 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Enemy took " + damage + " damage. Current health: " + currentHealth);
+        // Debug.Log("enemy took " + damage + " damage. Current health: " + currentHealth);
 
         if (currentHealth <= 0) {
             Die();
@@ -88,7 +91,12 @@ public class EnemyScript : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Enemy died!");
+        Vector3 enemyPosition = new Vector3(transform.position.x, 0, transform.position.z);
+        if(blood != null)
+        {
+            blood.SpawnBloodAt(enemyPosition);
+        }
+        Debug.Log("enemy died!");
         Destroy(gameObject);
     }
 }
