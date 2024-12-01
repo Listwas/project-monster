@@ -10,10 +10,10 @@ public class BulletScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            ThirdPersonMovement playerMovement = other.GetComponent<ThirdPersonMovement>();
-            if (playerMovement != null)
+            CombatScript playerCombat = other.GetComponent<CombatScript>();
+            if (playerCombat != null)
             {
-                playerMovement.TakeDamage(bulletDamage); 
+                playerCombat.TakeDamage(bulletDamage);
             }
 
             Destroy(gameObject);  

@@ -75,6 +75,7 @@
     <Compile Include="Assets/Scripts/playerScripts/evade_script.cs" />
     <Compile Include="Assets/Scripts/enemyScripts/EnemyScript.cs" />
     <Compile Include="Assets/Scripts/blood/spawningBlood.cs" />
+    <Compile Include="Assets/Scripts/playerScripts/CombatScript.cs" />
     <Compile Include="Assets/Scripts/blood/stopPlayerMove.cs" />
     <Compile Include="Assets/Scripts/playerScripts/third_person_movement.cs" />
   </ItemGroup>
