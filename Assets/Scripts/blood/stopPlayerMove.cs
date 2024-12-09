@@ -6,7 +6,7 @@ public class stopPlayerMove : MonoBehaviour
     private PlayerEvade evade;
     private ThirdPersonMovement move;
     public int blockMovementTime = 5;
-    public float blockMovementDelay = 0.2f; //może być bez
+    public float blockMovementDelay = 0.2f; //może być bez, dodalam bo z delay wyglada naturalniej
     void Start()
     {
         evade = FindObjectOfType<PlayerEvade>();

@@ -6,12 +6,14 @@ public class bloodCount : MonoBehaviour
 {
     [Header("Blood Counting")]
     public int playerBloodPoints = 0; // ile krwi ma na sobie gracz
-    public int addBloodPoints = 5; //ile krwi dodane po wejsciu w plame krwi
+    public int addBloodPoints = 1; //ile krwi dodane po wejsciu w plame krwi
     [Header("Fear Mode")]
     public int bloodPointsFearMode = 50; // jak dużo krwi gracz musi mieć do osiągnięcia fear mode
     public int fearModeTime = 10;
+    [Header("DMG")]
 
-    
+    public float multiplier = 1.0f;
+    public int pointsForMultiplier = 5; // po ilu pkt krwi zwieksza się dmg multiplikator
 
     public void addBlood()
     {
@@ -29,9 +31,10 @@ public class bloodCount : MonoBehaviour
 
     public void dmgMultiply()
     {
-        if(playerBloodPoints % 10 == 0)
+        if(playerBloodPoints % pointsForMultiplier == 0)
         {
-            Debug.Log("Add dmg");
+            multiplier += 0.1f;
+            Debug.Log($"Curent multiplier: {multiplier}");
 
         }
     }
