@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <Compile Include="Assets/Scripts/playerScripts/old/CharControler.cs" />
     <Compile Include="Assets/Scripts/enemyScripts/BulletScript.cs" />
     <Compile Include="Assets/Scripts/playerScripts/old/playerCombat.cs" />
@@ -83,6 +84,16 @@
     <Compile Include="Assets\Scripts\blood\spawningBlood.cs" />
     <Compile Include="Assets\Scripts\playerScripts\CombatScript.cs" />
     <Compile Include="Assets\Scripts\blood\stopPlayerMove.cs" />
+    <Compile Include="Assets\Scripts\playerScripts\third_person_movement.cs" />
+>>>>>>> Stashed changes
+=======
+    <Compile Include="Assets\Scripts\playerScripts\old\CharControler.cs" />
+    <Compile Include="Assets\Scripts\enemyScripts\BulletScript.cs" />
+    <Compile Include="Assets\Scripts\playerScripts\old\playerCombat.cs" />
+    <Compile Include="Assets\GamePadMove.cs" />
+    <Compile Include="Assets\Scripts\playerScripts\old\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\playerScripts\evade_script.cs" />
+    <Compile Include="Assets\Scripts\enemyScripts\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\playerScripts\third_person_movement.cs" />
 >>>>>>> Stashed changes
   </ItemGroup>
@@ -852,66 +863,72 @@
       <Private>False</Private>
     </Reference>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <Reference Include="Unity.Timeline">
       <HintPath>Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+=======
+    <Reference Include="System.ComponentModel.Composition">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ComponentModel.Composition.dll</HintPath>
+>>>>>>> Stashed changes
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-      <HintPath>Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+    <Reference Include="System.Core">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    <Reference Include="System.Data">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
+    <Reference Include="System">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+    <Reference Include="System.Drawing">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Drawing.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    <Reference Include="System.IO.Compression.FileSystem">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.IO.Compression.FileSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
+    <Reference Include="System.Net">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Net.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+    <Reference Include="System.Numerics">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Numerics.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-      <HintPath>Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+    <Reference Include="System.Runtime.Serialization">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Runtime.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+    <Reference Include="System.ServiceModel.Web">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ServiceModel.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
+    <Reference Include="System.Transactions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Transactions.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    <Reference Include="System.Web">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    <Reference Include="System.Windows">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Windows.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+    <Reference Include="System.Xml">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    <Reference Include="System.Xml.Linq">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Linq.dll</HintPath>
       <Private>False</Private>
     </Reference>
+<<<<<<< Updated upstream
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
       <Private>False</Private>
@@ -1014,10 +1031,15 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.VisualScripting.Flow.Editor.dll</HintPath>
+=======
+    <Reference Include="System.Xml.Serialization">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
+>>>>>>> Stashed changes
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj">
       <Project>{D4ACC7F4-B02F-4772-45B2-6F4D78901536}</Project>
       <Name>Unity.EditorCoroutines.Editor</Name>
@@ -1078,6 +1100,8 @@
       <Project>{1978B8C2-CA0E-3C90-C890-FA6A472CC8DE}</Project>
       <Name>Unity.VisualScripting.Flow.Editor</Name>
     </ProjectReference>
+=======
+>>>>>>> Stashed changes
     <ProjectReference Include="Unity.Timeline.csproj">
       <Project>{A494ABFB-950E-D3AB-6E49-4EBC09C91936}</Project>
       <Name>Unity.Timeline</Name>
@@ -1086,14 +1110,31 @@
       <Project>{B3C591DC-336D-8D27-F2D0-CF2E38A4068D}</Project>
       <Name>Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection</Name>
     </ProjectReference>
+<<<<<<< Updated upstream
     <ProjectReference Include="Unity.ProBuilder.Editor.csproj">
       <Project>{00225FC8-E028-8657-81F0-31E5EA0FCC44}</Project>
       <Name>Unity.ProBuilder.Editor</Name>
+=======
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{9DEF60DA-66B5-D769-223B-0B8C6A73E81D}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.EditorCoroutines.Editor.csproj">
+      <Project>{D4ACC7F4-B02F-4772-45B2-6F4D78901536}</Project>
+      <Name>Unity.EditorCoroutines.Editor</Name>
+>>>>>>> Stashed changes
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
       <Project>{03C0D554-D4B0-ADAE-B92B-8B809CDC4C52}</Project>
       <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
     </ProjectReference>
+<<<<<<< Updated upstream
+=======
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{76EFE86B-221F-A567-E6EB-BB24B0DE22F8}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
+    </ProjectReference>
+>>>>>>> Stashed changes
     <ProjectReference Include="Unity.Performance.Profile-Analyzer.Editor.csproj">
       <Project>{A1F766AC-91D8-9AFE-5D51-B1AB79071B0A}</Project>
       <Name>Unity.Performance.Profile-Analyzer.Editor</Name>
@@ -1106,21 +1147,64 @@
       <Project>{8023805C-9FE6-8685-6EE8-939CAE248D27}</Project>
       <Name>Unity.TestTools.CodeCoverage.Editor.OpenCover.Model</Name>
     </ProjectReference>
+<<<<<<< Updated upstream
+=======
+    <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
+      <Project>{BEC582E1-C4F5-64A4-15DB-DF8DD21E5666}</Project>
+      <Name>Unity.PlasticSCM.Editor</Name>
+    </ProjectReference>
+>>>>>>> Stashed changes
     <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj">
       <Project>{4D34E28B-642C-3004-BB08-2B7B3E6DB370}</Project>
       <Name>Unity.VisualScripting.State.Editor</Name>
     </ProjectReference>
+<<<<<<< Updated upstream
+=======
+    <ProjectReference Include="Unity.Timeline.Editor.csproj">
+      <Project>{EED1BC14-B6F9-FC10-5CE1-CDCA0CE00B0F}</Project>
+      <Name>Unity.Timeline.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj">
+      <Project>{60D914F5-EF1D-5328-0793-5A1445759E26}</Project>
+      <Name>Unity.VisualScripting.Shared.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
+      <Project>{018B6F31-2FA4-3E2C-2DDC-CC51AB51D696}</Project>
+      <Name>Unity.VisualStudio.Editor</Name>
+    </ProjectReference>
+>>>>>>> Stashed changes
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{6ECFE8AC-1743-FD3B-142A-20F977138955}</Project>
       <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
+<<<<<<< Updated upstream
+=======
+    <ProjectReference Include="Unity.VisualScripting.Core.csproj">
+      <Project>{DE53AD28-3E41-56E8-8F19-6D4913124FA0}</Project>
+      <Name>Unity.VisualScripting.Core</Name>
+    </ProjectReference>
+>>>>>>> Stashed changes
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{5DFB5FD2-C6C0-4077-510F-A167BF24A0F3}</Project>
       <Name>Unity.TextMeshPro.Editor</Name>
     </ProjectReference>
+<<<<<<< Updated upstream
     <ProjectReference Include="Unity.ProBuilder.AssetIdRemapUtility.csproj">
       <Project>{90437904-3498-EAD7-D50B-60FF4F33427D}</Project>
       <Name>Unity.ProBuilder.AssetIdRemapUtility</Name>
+=======
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{9B2945D7-421A-5CFE-5FB8-C0CB3439C8F2}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj">
+      <Project>{B7AB0525-B90B-0517-8C9C-5DA6BCBF167C}</Project>
+      <Name>Unity.VisualScripting.Core.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Rider.Editor.csproj">
+      <Project>{82FFB528-BFBB-C4CB-3670-B4464997F2D6}</Project>
+      <Name>Unity.Rider.Editor</Name>
+>>>>>>> Stashed changes
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{61059416-BDDA-903B-1788-E3D0626E2918}</Project>
@@ -1134,6 +1218,17 @@
       <Project>{C3A911B5-9A30-1BC0-0FEA-54A450D93CD3}</Project>
       <Name>Cinemachine</Name>
     </ProjectReference>
+<<<<<<< Updated upstream
+=======
+    <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
+      <Project>{3B26A865-7418-A19E-C5DE-60D905E395CF}</Project>
+      <Name>Unity.VisualScripting.Flow</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj">
+      <Project>{1978B8C2-CA0E-3C90-C890-FA6A472CC8DE}</Project>
+      <Name>Unity.VisualScripting.Flow.Editor</Name>
+    </ProjectReference>
+>>>>>>> Stashed changes
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
